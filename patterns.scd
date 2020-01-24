@@ -99,6 +99,7 @@ Pdef(\jarret, Pbind(\instrument, \tupper,
 // Change scale and octave
 (
 Pdef(\jarret, Pbind(\instrument, \tupper,
+	\scale, Scale.harmonicMinor,
 	\octave, Pseq([3,4,5,6],inf),
 ));
 )
@@ -118,7 +119,7 @@ Pdef(\jarret, Pbind(\instrument, \tupper,
 		Pwhite(0.0, 2.0),
 	]),
 	\sus, 0.1,
-	\scale, Scale.ritusen,
+	\scale, Scale.harmonicMinor,
 	\octave, Prand([4,5,6],inf),
 	// \dur, Pseq([0.25, 0.25, 0.25, 0.25, 0.5, 0.5, 1], inf),
 	\dur, 1/4,
@@ -136,7 +137,7 @@ Pdef(\jarret, Pbind(\instrument, \tupper,
 // Add another hand
 (
 Pdef(\keith, Pbind(\instrument, \tupper,
-	\scale, Scale.ritusen,
+	\scale, Scale.harmonicMinor,
 	\octave, 3,
 	\degree, Pwhite(0,7),
 	\atk, 0.3,
