@@ -107,8 +107,14 @@ SynthDef(\x1,{
 )
 Synth(\x1)
 //====================================================
-s.boot
+// Using buffers
+//read the buffer and store it in a global variable
+
+//Example 1
 ~buff = Buffer.read(s,"/home/ivan/documents/toplap/talleres2020/tupper_6/on-the-fly-writing/ta.wav");
+//Example 2
+~buff = Buffer.read(s,"/home/ivan/documents/toplap/talleres2020/tupper_6/on-the-fly-writing/KickAkd11.wav");
+
 ~buff.play
 ~buff.numChannels
 ~buff.query
@@ -116,7 +122,7 @@ s.boot
 (
 SynthDef(\x2,{
 	var sig, env;
-	sig = PlayBuf.ar(~buff.numChannels,~buff.bufnum,0.5)!2;
+	sig = PlayBuf.ar(~buff.numChannels,~buff.bufnum,1)!2;
 	sig = sig * 1;
 	env = EnvGen.ar(Env.perc(0,2),doneAction:2);
 	Out.ar(0,sig * env)
