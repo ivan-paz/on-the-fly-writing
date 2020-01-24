@@ -44,6 +44,16 @@ Pdef(\jarret, Pbind(\instrument, \tupper,
 ));
 )
 
+// Repeat parts.
+(
+Pdef(\jarret, Pbind(\instrument, \tupper,
+	\degree, Pseq([
+		Pseq([0,2,4], 3),
+		Pshuf([-1,-2,-3], 1),
+	], inf)
+));
+)
+
 // Chords.
 (
 Pdef(\jarret, Pbind(\instrument, \tupper,
@@ -84,7 +94,15 @@ Pdef(\jarret, Pbind(\instrument, \tupper,
 ));
 )
 
-// Polyphony
+// Change scale and octave
+(
+Pdef(\jarret, Pbind(\instrument, \tupper,
+	\scale, Scale.harmonicMinor,
+	\octave, Pseq([3,4,5,6],inf),
+));
+)
+
+// Polyphony - Ptuple() is for arrays of patterns
 (
 Pdef(\jarret, Pbind(\instrument, \tupper,
 	\octave, [3,6],
@@ -96,18 +114,12 @@ Pdef(\jarret, Pbind(\instrument, \tupper,
 ));
 )
 
-// Change scale and octave
-(
-Pdef(\jarret, Pbind(\instrument, \tupper,
-	\scale, Scale.harmonicMinor,
-	\octave, Pseq([3,4,5,6],inf),
-));
-)
-
 // Custom arguments
 (
 Pdef(\jarret, Pbind(\instrument, \tupper,
 	\feedback, Pwhite(0.0, 4.0).trace,
+	\atk, Pseq([0.01, 0.1, 0.3], inf),
+	\sus, Prand([0.1, 0.9, 0.5], inf).trace,
 ));
 )
 
@@ -131,7 +143,7 @@ Pdef(\jarret, Pbind(\instrument, \tupper,
 	\amp, Ptuple([
 		Pbjorklund(3,5),
 		Pbjorklund(7,8),
-	]) * 0.3,
+	]) * Pwhite(0.05, 0.1),
 ));
 )
 // Add another hand
@@ -145,4 +157,18 @@ Pdef(\keith, Pbind(\instrument, \tupper,
 	\legato, 2,
 	\feedback, Pwhite(0.0,2.0),
 )).play(quant:1);
+)
+
+// jam
+(
+Pdef(\keith).stop;
+Pdef(\jarret).play;
+)
+(
+Pdef(\keith).play;
+Pdef(\jarret).stop;
+)
+(
+Pdef(\keith).play;
+Pdef(\jarret).play;
 )
