@@ -18,7 +18,7 @@ SynthDef(\name,{ /* sound definition */ }).add
 )
 
 
-//    a sound definition has tree main parts
+//    a sound definition has four main parts
 0. definitions arguments and variables
 1. UGen
 2. Env
@@ -110,7 +110,11 @@ Synth(\x1)
 // Using buffers
 //read the buffer and store it in a global variable
 
+//Change the path to the current file location in your machine
+
+
 //Example 1
+
 ~buff = Buffer.read(s,"/home/ivan/documents/toplap/talleres2020/tupper_6/on-the-fly-writing/ta.wav");
 //Example 2
 ~buff = Buffer.read(s,"/home/ivan/documents/toplap/talleres2020/tupper_6/on-the-fly-writing/KickAkd11.wav");
