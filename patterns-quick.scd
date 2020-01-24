@@ -25,28 +25,28 @@ SynthDef(\tupper, {
 )
 
 // A famous musician to play the synth.
-Pdef(\jarret);
+Pdef(\jarrett);
 
 // Sync.
 // Starts playing on the next beat.
-Pdef(\jarret).play(quant:1);
+Pdef(\jarrett).play(quant:1);
 
 // Give the musician the score sheet for the synth, A.K.A.: Pbind
-Pdef(\jarret, Pbind(\instrument, \tupper));
+Pdef(\jarrett, Pbind(\instrument, \tupper));
 
 // Change the score sheet for another one with a melody.
 // This is like saying:
-// Please, Mr. Jarret, play this piece with the Tupper Synth.
+// Please, Mr. Jarrett, play this piece with the Tupper Synth.
 // The score being: Play a major triad arpeggio forever.
 (
-Pdef(\jarret, Pbind(\instrument, \tupper,
+Pdef(\jarrett, Pbind(\instrument, \tupper,
 	\degree, Pseq([0,2,4],inf),
 ));
 )
 
 // Repeat parts.
 (
-Pdef(\jarret, Pbind(\instrument, \tupper,
+Pdef(\jarrett, Pbind(\instrument, \tupper,
 	\degree, Pseq([
 		Pseq([0,2,4], 3),
 		Pshuf([-1,-2,-3], 1),
@@ -56,14 +56,14 @@ Pdef(\jarret, Pbind(\instrument, \tupper,
 
 // Chords.
 (
-Pdef(\jarret, Pbind(\instrument, \tupper,
+Pdef(\jarrett, Pbind(\instrument, \tupper,
 	\degree, [0,2,4],
 ));
 )
 
 // Chord progression
 (
-Pdef(\jarret, Pbind(\instrument, \tupper,
+Pdef(\jarrett, Pbind(\instrument, \tupper,
 	\degree, Pseq([
 		[0,2,4],
 		[1,3,5],
@@ -74,21 +74,21 @@ Pdef(\jarret, Pbind(\instrument, \tupper,
 
 // Chord progression variant
 (
-Pdef(\jarret, Pbind(\instrument, \tupper,
+Pdef(\jarrett, Pbind(\instrument, \tupper,
 	\degree, [0,2,4] + Pseq([0,1,-3], inf),
 ));
 )
 
 // Rhythm
 (
-Pdef(\jarret, Pbind(\instrument, \tupper,
+Pdef(\jarrett, Pbind(\instrument, \tupper,
 	\dur, Pseq([0.25, 0.5, 1],inf),
 ));
 )
 
 // Melody and Rhythm
 (
-Pdef(\jarret, Pbind(\instrument, \tupper,
+Pdef(\jarrett, Pbind(\instrument, \tupper,
 	\dur, Pseq([0.25, 0.5, 1],inf),
 	\degree, Pseq([0,2,4],inf),
 ));
@@ -96,7 +96,7 @@ Pdef(\jarret, Pbind(\instrument, \tupper,
 
 // Change scale and octave
 (
-Pdef(\jarret, Pbind(\instrument, \tupper,
+Pdef(\jarrett, Pbind(\instrument, \tupper,
 	\scale, Scale.harmonicMinor,
 	\octave, Pseq([3,4,5,6],inf),
 ));
@@ -104,7 +104,7 @@ Pdef(\jarret, Pbind(\instrument, \tupper,
 
 // Polyphony - Ptuple() is for arrays of patterns
 (
-Pdef(\jarret, Pbind(\instrument, \tupper,
+Pdef(\jarrett, Pbind(\instrument, \tupper,
 	\octave, [3,6],
 	\dur, Pseq([0.25, 0.5, 1],inf),
 	\degree, Ptuple([
@@ -116,7 +116,7 @@ Pdef(\jarret, Pbind(\instrument, \tupper,
 
 // Custom arguments
 (
-Pdef(\jarret, Pbind(\instrument, \tupper,
+Pdef(\jarrett, Pbind(\instrument, \tupper,
 	\feedback, Pwhite(0.0, 4.0).trace,
 	\atk, Pseq([0.01, 0.1, 0.3], inf),
 	\sus, Prand([0.1, 0.9, 0.5], inf).trace,
@@ -125,7 +125,7 @@ Pdef(\jarret, Pbind(\instrument, \tupper,
 
 // All of the above and more.
 (
-Pdef(\jarret, Pbind(\instrument, \tupper,
+Pdef(\jarrett, Pbind(\instrument, \tupper,
 	\feedback, Ptuple([
 		Pwhite(0.0, 2.0),
 		Pwhite(0.0, 2.0),
@@ -162,13 +162,13 @@ Pdef(\keith, Pbind(\instrument, \tupper,
 // jam
 (
 Pdef(\keith).stop;
-Pdef(\jarret).play;
+Pdef(\jarrett).play;
 )
 (
 Pdef(\keith).play;
-Pdef(\jarret).stop;
+Pdef(\jarrett).stop;
 )
 (
 Pdef(\keith).play;
-Pdef(\jarret).play;
+Pdef(\jarrett).play;
 )
