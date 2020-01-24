@@ -39,24 +39,28 @@ SynthDef(\patty, {
 // using the symbol of the SynthDef.
 Pbind(\instrument, \patty).play;
 
-// To play change the frequency of our synth we can tell Pbind what frequency we want it to play.
+// To change the frequency of our synth we can tell Pbind what frequency we want it to play.
 Pbind(\instrument, \patty, \freq, 200).play;
 Pbind(\instrument, \patty, \freq, 800).play;
 
 // ------------------------------------------
-// How do we play a melody?
+// Melody
 
-// Providing the \freq argument with a pattern.
+// Providing the \freq argument a pattern.
 Pbind(\instrument, \patty, \freq, Pseq([200,400,800])).play;
 
 // All pattern classes start with 'P'.
 // 'Pseq' is a pattern that sequences an array of values.
+// Other patterns are: Prand, Pwhite, Pshuf, and many many many more.
+// These are List patters. There are patterns for all kinds of stuff, like math, logic,
+// filtering values, playing patterns in parallel, ...
+//
 // Patterns usually take a list of values and the number of times they must be played.
 // usual sytax: Pwhatever( list-of-values, number-of-repetitions )
-// These may vary, but it's quite common.
+// These may vary, but it's quite common, specially for List patterns.
 
-// It only plays once because we didn't provide an argument for the number of repetitions and
-// Pseq defaults to 1 repetition.
+// The example above only plays once because we didn't provide an argument for the number of
+// repetitions and Pseq defaults to 1 repetition.
 // To play it twice you just add a 2 as repetition argument
 Pbind(\instrument, \patty, \freq, Pseq([200,400,800], 2)).play;
 // Use 'inf' to play it forever.
@@ -76,7 +80,7 @@ Pbind(\instrument, \patty, \scale, Scale.harmonicMinor, \degree, Pseq([0, 2, 4, 
 Scale.directory; // see the post
 
 // ------------------------------------------
-// How about rhythm?
+// Rhythm
 
 // Pbind plays a synth on every beat by default.  To change that there's the \dur argument.
 Pbind(\instrument, \patty).play;
@@ -85,11 +89,11 @@ Pbind(\instrument, \patty, \dur, 0.5).play;
 // To create a rhythm we can use... a pattern!
 Pbind(\instrument, \patty, \dur, Pseq([0.5, 1, 1, 0.25, 1.75], 2)).play;
 
-// Combine rhythm and melody to get a full score
+// Combine rhythm and melody to get a musical phrase.
 Pbind(\instrument, \patty, \dur, Pseq([0.5, 1, 1, 0.25, 1.75], inf), \degree, Pseq([0, 2, 4, -1], inf)).play;
 
 // ------------------------------------------
-// Is that it? NOOOO!
+// Arguments
 
 // You can sequence ANY argument in any order.
 // Pbind has quite a few default arguments. You may be interested in:
@@ -105,7 +109,7 @@ Pbind(\instrument, \patty, \dur, Pseq([0.5, 1, 1, 0.25, 1.75], inf), \degree, Ps
 \legato
 // see Pbind documentation if you want more.
 
-// Let's use some with other patterns:
+// Here's an example:
 (
 Pbind(\instrument, \patty,
 	\dur, Prand([0.5, 1, 1, 0.25, 1.75], inf),
@@ -117,6 +121,10 @@ Pbind(\instrument, \patty,
 
 // What about custom arguments?
 // Pbind can use any argument that your SynthDef declares.
+
+// Does nothing because the default synth has no feedback argument
+Pbind(\feedback, Pwhite(0.0, 4.0)).play; 
+// But our SynthDef does have a feedback argument.
 Pbind(\instrument, \patty, \feedback, Pwhite(0.0, 4.0)).play;
 
 // ------------------------------------------
@@ -126,8 +134,16 @@ Pbind(\instrument, \patty).play(quant:1);
 
 // ------------------------------------------
 // Modify without stopping the server
-Pdef(\jarret, Pbind(\instrument, \patty, \octave, 3, \degree, Pwhite(0,7), \dur, Prand((1..4) * 0.25, inf))).play(quant:1);
+
+// Tell a famous musician to play our score, starting on the next beat.
+Pdef(\jarret).play(quant:1);
+// Giver the musician a score.
+Pdef(\jarret, Pbind(\instrument, \patty, \octave, 4, \degree, Pwhite(0,7), \dur, Prand((1..4) * 0.25, inf)));
+// Modify the score on-the-fly
 Pdef(\jarret, Pbind(\instrument, \patty, \degree, Pseq([0,2,4],7), \dur, 0.25));
+// jam
+Pdef(\jarret).stop;
+Pdef(\jarret).play;
 
  
 // ------------------------------------------
