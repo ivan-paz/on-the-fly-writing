@@ -8,20 +8,79 @@
 //
 //==================================================================
 
+//SynthDef is one of the structures in SC that allow us to define a sound synthesis
+
+// the basic structure is
+(
+
+SynthDef(\name,{ /* sound definition */ }).add
+
+)
+
+
+//    a sound definition has tree main parts
+0. definitions arguments and variables
+1. UGen
+2. Env
+3. Out
+
+
+//   this is a simple sound definition
+
+(
+SynthDef(\myFirstSynth,{
+
+	//variables var defines the variables in the synth
+	var signal, envelop;
+
+	//UGens signal is assigned with a Sinusoidal Oscillator of 440Hz
+	signal = SinOsc.ar(440);
+
+	// envelop is assigned with a percusive envelop
+	envelop = EnvGen.ar(Env.perc(0.01,1));
+
+	// the Out has array of buses and sent objects
+	Out.ar([0,1],signal*envelop);
+}).add
+)
+Synth(\myFirstSynth)
+
+
+
+
+//   arguments can be changed
+
+(
+SynthDef(\myFirstSynth,{
+	//NOTE ASSIGNATION OF freq AND amp
+	arg freq= 220, amp=0.5;
+
+	var signal, envelop;
+
+	signal = SinOsc.ar(freq, 0, amp);
+
+	envelop = EnvGen.ar(Env.perc(0.01,1));
+
+	Out.ar([0,1],signal*envelop);
+}).add
+)
+
+Synth(\myFirstSynth).set(\freq, 880, \amp, 0.5)
+
+
+//      W  R  I  T  I  N  G    S  Y  N  T  H  S  ---------------------
+
+
 (
 SynthDef(\x,{
 	arg freq = 2, amp = 1;
 	var sig, env;
 	sig = Impulse.ar(freq,0,amp)!2;
-	env = EnvGen.ar(Env.perc(0,1),doneAction:2);
+	env = EnvGen.ar(Env.perc(0,4),doneAction:2);
 	Out.ar(0, sig * env)
 }).add
 )
-(Tdef(\px,{
-	inf.do{
-		Synth(\x);
-		[1,0.01,1,0.01].choose.wait
-}}).stop)
+Synth(\x)
 
 (
 SynthDef(\x,{
@@ -46,11 +105,7 @@ SynthDef(\x1,{
 	Out.ar(0,sig * env)
 }).add
 )
-(Tdef(\px1,{
-	inf.do{
-		Synth(\x1);
-		[1,0.1,1,0.01].choose.wait
-}}).stop)
+Synth(\x1)
 //====================================================
 s.boot
 ~buff = Buffer.read(s,"/home/ivan/documents/toplap/talleres2020/tupper_6/on-the-fly-writing/ta.wav");
@@ -61,7 +116,7 @@ s.boot
 (
 SynthDef(\x2,{
 	var sig, env;
-	sig = PlayBuf.ar(~buff.numChannels,~buff.bufnum)!2;
+	sig = PlayBuf.ar(~buff.numChannels,~buff.bufnum,0.5)!2;
 	sig = sig * 1;
 	env = EnvGen.ar(Env.perc(0,2),doneAction:2);
 	Out.ar(0,sig * env)
@@ -70,5 +125,5 @@ SynthDef(\x2,{
 Synth(\x2)
 
 
-s.quita
+s.quit
 	
