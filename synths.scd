@@ -11,11 +11,18 @@
 //SynthDef is one of the structures in SC that allow us to define a sound synthesis
 
 // the basic structure is
+
+
+
+
 (
 
 SynthDef(\name,{ /* sound definition */ }).add
 
 )
+
+
+
 
 
 //    a sound definition has four main parts
