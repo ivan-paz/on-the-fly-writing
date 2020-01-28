@@ -100,12 +100,13 @@ SynthDef(\x,{
 }).add;
 )
 Synth(\x)
-//====================================================
+s.boot
+//=============================================
 (
 SynthDef(\x1,{
-	arg freq = 2, amp = 0.9;
+	arg freq = 110, amp = 0.9;
 	var sig, env;
-	sig = Impulse.ar(freq,0,amp)!2;
+	sig = Saw.ar([freq,freq+1],amp)!2;
 	sig = FreeVerb.ar(sig,SinOsc.kr(10),SinOsc.kr(3),SinOsc.kr(4));
 	sig = sig * 3;
 	env = EnvGen.ar(Env.perc(0,2),doneAction:2);
@@ -113,7 +114,7 @@ SynthDef(\x1,{
 }).add
 )
 Synth(\x1)
-//====================================================
+//==============================================
 // Using buffers
 //read the buffer and store it in a global variable
 
